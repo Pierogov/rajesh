@@ -19,7 +19,7 @@ public class RajeshAnimationEvents : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
     }
 
-    //triiger do skoku
+    //triger do skoku
     public void Jump()
     {
         animator.SetTrigger("Jump");

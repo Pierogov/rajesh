@@ -53,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+
+        //dodatkowa prędkośc po skoku
         if (boostTime > 0)
         {
             if (boostTime / startBoostTime < 0.5)
@@ -74,6 +76,10 @@ public class PlayerMovement : MonoBehaviour
         if (!jumped && !sliding) 
         { 
             if(Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow))
+            {
+                moveInput = 0;
+            }
+            else if (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow) && moveInput != 0)
             {
                 moveInput = 0;
             }
@@ -112,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //skok
-        if(Input.GetButtonDown("Jump") && extraJumps > 0 && !sliding)
+        if(Input.GetButtonDown("Jump") && extraJumps > 0)
         {
             rb.velocity = Vector2.up * jumpForce;
             extraJumps--;
@@ -122,11 +128,26 @@ public class PlayerMovement : MonoBehaviour
             }
             jumped = true;
         }
-        else if(Input.GetButtonDown("Jump") && extraJumps == 0 && isGrounded && !jumped && !sliding)
+        else if(Input.GetButtonDown("Jump") && extraJumps == 0 && isGrounded && !jumped)
         {
             rb.velocity = Vector2.up * jumpForce;
             animator.SetTrigger("TakeOf");
             jumped = true;
+            if (sliding)
+            {
+                speed = startSpeed * 1.8f;
+            }
+        }
+
+        //przyśpieszanie skoku
+        if (!isGrounded)
+        {
+            speed = startSpeed * 1.5f;
+        }
+
+        if(landing && jumped)
+        {
+            speed = startSpeed * speedMultiplier;
         }
 
         //ustawianie odpowiedniej animacji
@@ -148,16 +169,38 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //sprawdzanie warunków do ślizgu
-        if (sliding && Input.GetKey(KeyCode.DownArrow) && !blockSlide)
+        if (!isGrounded && Input.GetKey(KeyCode.DownArrow) && !blockSlide)
+        {
+            jumped = true;
+            if (slideTime > 0)
+            {
+                if (isGrounded) { speed = startSpeed * 1.8f; }
+                moveInput = NormalizeValue(transform.localScale.x);
+                animator.SetBool("isSliding", true);
+                sliding = true;
+                if (isGrounded) { slideTime -= Time.deltaTime; }
+            }
+            else
+            {
+                animator.SetBool("isSliding", false);
+                speed = startSpeed;
+                sliding = false;
+                blockSlide = true;
+            }
+        }
+        else if (sliding && Input.GetKey(KeyCode.DownArrow) && !blockSlide)
         {
             jumped = false;
             if (slideTime > 0)
             {
-                speed = startSpeed * 1.8f;
+                if (isGrounded)
+                {
+                    speed = startSpeed * 1.8f;
+                }
                 moveInput = NormalizeValue(transform.localScale.x);
                 animator.SetBool("isSliding", true);
                 sliding = true;
-                slideTime -= Time.deltaTime;
+                if (isGrounded) { slideTime -= Time.deltaTime; }
             }
             else
             {
@@ -172,11 +215,14 @@ public class PlayerMovement : MonoBehaviour
             jumped = false;
             if (slideTime > 0)
             {
-                speed = startSpeed * 1.8f;
+                if (isGrounded)
+                {
+                    speed = startSpeed * 1.8f;
+                }
                 moveInput = NormalizeValue(transform.localScale.x);
                 animator.SetBool("isSliding", true);
                 sliding = true;
-                slideTime -= Time.deltaTime;
+                if (isGrounded) { slideTime -= Time.deltaTime; }
             }
             else
             {
@@ -191,11 +237,14 @@ public class PlayerMovement : MonoBehaviour
             jumped = false;
             if (slideTime > 0)
             {
-                speed = startSpeed * 1.8f;
+                if (isGrounded)
+                {
+                    speed = startSpeed * 1.8f;
+                }
                 moveInput = NormalizeValue(transform.localScale.x);
                 animator.SetBool("isSliding", true);
                 sliding = true;
-                slideTime -= Time.deltaTime;
+                if (isGrounded) { slideTime -= Time.deltaTime; }
             }
             else
             {
@@ -225,7 +274,7 @@ public class PlayerMovement : MonoBehaviour
         bool groundBuffer = isGrounded;
 
         //sprawdzanie czy gracz dotyka ziemi
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, collider.size.x, whatIsGrounded);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, collider.size.x * 0.85f, whatIsGrounded);
 
         //zakończenie animacji skoku
         if(isGrounded == true && groundBuffer == false)
@@ -251,7 +300,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnDrawGizmos()
     {
         //rysowanie gizmo ground
-        try { Gizmos.DrawWireSphere(groundCheck.position, collider.size.x); }
+        try { Gizmos.DrawWireSphere(groundCheck.position, collider.size.x * 0.95f); }
         catch { };
     }
 
