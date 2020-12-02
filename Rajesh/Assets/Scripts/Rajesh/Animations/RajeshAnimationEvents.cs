@@ -31,4 +31,38 @@ public class RajeshAnimationEvents : MonoBehaviour
         playerMovement.jumped = false;
         playerMovement.boostTime = playerMovement.startBoostTime;
     }
+    public void TakeOF()
+    {
+        playerMovement.takingof = !playerMovement.takingof;
+        playerMovement.startJump = true;
+        playerMovement.engagingJump = true;
+
+    }
+
+    public void Land()
+    {
+        playerMovement.landingAnim = !playerMovement.landingAnim;
+    }
+
+    public void BlockSpeed()
+    {
+        playerMovement.blockSpeed = !playerMovement.blockSpeed;
+    }
+    public void EndAnim()
+    {
+        playerMovement.startJump = false;
+        //playerMovement.boostTime = playerMovement.startBoostTime;
+    }
+    public void EngageJump()
+    {
+        playerMovement.engagingJump = false;
+    }
+    public void SmoothEnd()
+    {
+        playerMovement.smoothEnd = false;
+    }
+    public void SmoothStart()
+    {
+        playerMovement.smoothEnd = true;
+    }
 }

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57b417653d439e64db4676c3dd8769e7, type: 3}
+  m_Name: TestWeapon
+  m_EditorClassIdentifier: 
+  fireRate: 0.3
+  ammoMax: 30
+  recoil: 0
+  bulletSpeed: 30
+  lifeTime: 1
+  automatic: 0
+  fullImg: {fileID: 21300000, guid: 662ae246a0fb8c34ca72f311620f6002, type: 3}
+  halfImg: {fileID: 21300000, guid: d1443c2b24367e34ab01e3bec4010885, type: 3}
+  lowIMG: {fileID: 21300000, guid: 662ae246a0fb8c34ca72f311620f6002, type: 3}

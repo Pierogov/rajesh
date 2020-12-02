@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - CameraFollower
+  - WeaponManager
+  - Enamy
   layers:
   - Default
   - TransparentFX

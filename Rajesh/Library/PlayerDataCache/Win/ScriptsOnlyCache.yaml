@@ -1,14 +1,18 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - BulletScript
     - CameraMovement
     - PlayerMovement
     - RajeshAnimationEvents
     - SlideSliderScript
+    - Weapon
+    - WeaponManager
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
     - UnityEditor.Experimental.U2D.IK.IKEditorManager
+    - UnityEditor.Experimental.U2D.IK.IKGizmos
     Unity.2D.IK.Runtime.dll:
     - UnityEditor.Experimental.U2D.IK.IKEditorManagerHelper
     Unity.2D.Sprite.Editor.dll:
@@ -29,8 +33,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -71,28 +77,36 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 95
       Script: {instanceID: 0}
+    - Class: 96
+      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
       Script: {instanceID: 11170}
     - Class: 114
-      Script: {instanceID: 11520}
+      Script: {instanceID: 11522}
     - Class: 114
-      Script: {instanceID: 12184}
+      Script: {instanceID: 12018}
     - Class: 114
-      Script: {instanceID: 13344}
+      Script: {instanceID: 12186}
     - Class: 114
-      Script: {instanceID: 13456}
+      Script: {instanceID: 12288}
     - Class: 114
-      Script: {instanceID: 13498}
+      Script: {instanceID: 13348}
     - Class: 114
-      Script: {instanceID: 13668}
+      Script: {instanceID: 13460}
     - Class: 114
-      Script: {instanceID: 14288}
+      Script: {instanceID: 13502}
     - Class: 114
-      Script: {instanceID: 14330}
+      Script: {instanceID: 13652}
     - Class: 114
-      Script: {instanceID: 14396}
+      Script: {instanceID: 13674}
+    - Class: 114
+      Script: {instanceID: 14294}
+    - Class: 114
+      Script: {instanceID: 14336}
+    - Class: 114
+      Script: {instanceID: 14402}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -122,6 +136,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SelectionCaret
+  - hash:
+      serializedVersion: 2
+      Hash: db7fba08aedbd4fd332e11090a7db67f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ArmFix
   - hash:
       serializedVersion: 2
       Hash: 87ff43d2baf3385cba327d8f803a4ebb
@@ -292,7 +312,7 @@ ScriptsOnlyBuild:
     className: Mask
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 52f9cbf9d760080806eb820d144c6e40
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: WeaponManager
@@ -344,6 +364,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Selectable
+  - hash:
+      serializedVersion: 2
+      Hash: 1dea79472a521364c58382326af57352
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Weapon
   - hash:
       serializedVersion: 2
       Hash: b3ab2106268377ffe25dd18ac23dca28
@@ -478,7 +504,7 @@ ScriptsOnlyBuild:
     className: FabrikSolver2D
   - hash:
       serializedVersion: 2
-      Hash: 38928560d6271354c7f57ada9b75e149
+      Hash: 3eab80b7450e10568e224268599c3d50
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerMovement
@@ -506,6 +532,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: AudioTrack
+  - hash:
+      serializedVersion: 2
+      Hash: a38e7df819aa8b7eca073c73b7be9323
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BulletScript
   - hash:
       serializedVersion: 2
       Hash: ae83e830e7a90c0aff918c4c2e520825
@@ -653,4 +685,4 @@ ScriptsOnlyBuild:
   platform: 5
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: D:/Unity - Projekty/Rajesh/Builds/TestBuilds/0.1.6/Rajesh.exe
+  playerPath: D:/Unity - Projekty/Rajesh/Builds/TestBuilds/0.2.4/Rajesh.exe

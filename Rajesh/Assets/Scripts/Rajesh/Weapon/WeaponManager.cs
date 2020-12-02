@@ -6,6 +6,10 @@ public class WeaponManager : MonoBehaviour
 {
     //obecnie używana broń
     public Weapon activeWeapon;
+    int currentAmmo;
+
+    float timeToShoot;
+    public float startTimeToShoot;
 
     //zmienne
     public float offset;
@@ -15,13 +19,18 @@ public class WeaponManager : MonoBehaviour
 
     //obiekty
     public GameObject rotator;
+    public Transform gunPoint;
 
     //dwie ręce
-    public SpriteRenderer upww, up, lowww, low;
+    public SpriteRenderer upww, up, lowww, low, weaponSprite;
+
+    //prefaby
+    public GameObject shootPrefab;
 
     void Start()
     {
         animator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        currentAmmo = activeWeapon.ammoMax;
     }
 
     void Update()
@@ -34,6 +43,7 @@ public class WeaponManager : MonoBehaviour
             //ustawianie kolorów
             lowww.color = new Vector4(lowww.color.r, lowww.color.g, lowww.color.b, 0f);
             upww.color = new Vector4(upww.color.r, upww.color.g, lowww.color.b, 0f);
+            weaponSprite.color = new Vector4(weaponSprite.color.r, weaponSprite.color.g, weaponSprite.color.b, 0f);
             low.color = new Vector4(low.color.r, low.color.g, low.color.b, 1f);
             up.color = new Vector4(up.color.r, up.color.g, low.color.b, 1f);
         }
@@ -44,6 +54,7 @@ public class WeaponManager : MonoBehaviour
             //ustawianie kolorów
             lowww.color = new Vector4(lowww.color.r, lowww.color.g, lowww.color.b, 1f);
             upww.color = new Vector4(upww.color.r, upww.color.g, lowww.color.b, 1f);
+            weaponSprite.color = new Vector4(weaponSprite.color.r, weaponSprite.color.g, weaponSprite.color.b, 1f);
             low.color = new Vector4(low.color.r, low.color.g, low.color.b, 0f);
             up.color = new Vector4(up.color.r, up.color.g, low.color.b, 0f);
 
@@ -53,12 +64,60 @@ public class WeaponManager : MonoBehaviour
             float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
 
-            /*
-            var addAngle = 90;
-            var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + addAngle;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            */
+            //ustawianie obrazka aktywnej broni w zależności od pozostałej amunicji
+            if(currentAmmo >= 0.5 * activeWeapon.ammoMax)
+            {
+                weaponSprite.sprite = activeWeapon.fullImg;
+            }
+            else if(currentAmmo >= 0.25 * activeWeapon.ammoMax && currentAmmo < 0.5 * activeWeapon.ammoMax)
+            {
+                weaponSprite.sprite = activeWeapon.halfImg;
+            }
+            else
+            {
+                weaponSprite.sprite = activeWeapon.lowIMG;
+            }
+
+            //strzal
+            if (!activeWeapon.automatic)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    if(currentAmmo>0)
+                    {
+                        if (timeToShoot <= 0)
+                        {
+                            Instantiate(shootPrefab, gunPoint.position, Quaternion.Euler(0f, 0f, transform.eulerAngles.z + transform.eulerAngles.z * Random.Range(-activeWeapon.recoil, activeWeapon.recoil)));
+                            currentAmmo -= 1;
+                            timeToShoot = startTimeToShoot * activeWeapon.fireRate;
+                        }
+                        else
+                        {
+                            timeToShoot -= Time.deltaTime;
+                        } 
+                    }
+                }
+            }
+            else 
+            { 
+                if (Input.GetMouseButton(0))
+                {
+                    if (currentAmmo > 0)
+                    {
+                        if (timeToShoot <= 0)
+                        {
+                            Instantiate(shootPrefab, gunPoint.position, Quaternion.Euler(0f, 0f, transform.eulerAngles.z + transform.eulerAngles.z * Random.Range(-activeWeapon.recoil, activeWeapon.recoil)));
+                            currentAmmo -= 1;
+                            timeToShoot = startTimeToShoot * activeWeapon.fireRate;
+                        }
+                        else
+                        {
+                            timeToShoot -= Time.deltaTime;
+                        }
+                    }
+                }
+            }
+            timeToShoot -= Time.deltaTime;
         }
     }
 }
