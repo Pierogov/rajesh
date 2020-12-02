@@ -265,7 +265,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("isSliding", false);
             sliding = false;
-            if (slideTime < startSlideTime) { slideTime += Time.deltaTime; }
+            if (slideTime < startSlideTime && isGrounded) { slideTime += Time.deltaTime; }
         }
     }
     private void FixedUpdate()
