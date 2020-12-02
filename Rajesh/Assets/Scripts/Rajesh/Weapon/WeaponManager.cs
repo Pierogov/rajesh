@@ -27,9 +27,13 @@ public class WeaponManager : MonoBehaviour
     //prefaby
     public GameObject shootPrefab;
 
+    //skrypty
+    CameraShake cameraShake;
+
     void Start()
     {
         animator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        cameraShake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
         currentAmmo = activeWeapon.ammoMax;
     }
 
@@ -88,6 +92,7 @@ public class WeaponManager : MonoBehaviour
                         if (timeToShoot <= 0)
                         {
                             Instantiate(shootPrefab, gunPoint.position, Quaternion.Euler(0f, 0f, transform.eulerAngles.z + transform.eulerAngles.z * Random.Range(-activeWeapon.recoil, activeWeapon.recoil)));
+                            cameraShake.ShakeX();
                             currentAmmo -= 1;
                             timeToShoot = startTimeToShoot * activeWeapon.fireRate;
                         }
@@ -107,6 +112,7 @@ public class WeaponManager : MonoBehaviour
                         if (timeToShoot <= 0)
                         {
                             Instantiate(shootPrefab, gunPoint.position, Quaternion.Euler(0f, 0f, transform.eulerAngles.z + transform.eulerAngles.z * Random.Range(-activeWeapon.recoil, activeWeapon.recoil)));
+                            cameraShake.ShakeX();
                             currentAmmo -= 1;
                             timeToShoot = startTimeToShoot * activeWeapon.fireRate;
                         }
