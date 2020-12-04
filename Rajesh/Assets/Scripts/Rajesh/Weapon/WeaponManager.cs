@@ -92,7 +92,7 @@ public class WeaponManager : MonoBehaviour
                         if (timeToShoot <= 0)
                         {
                             Instantiate(shootPrefab, gunPoint.position, Quaternion.Euler(0f, 0f, transform.eulerAngles.z + transform.eulerAngles.z * Random.Range(-activeWeapon.recoil, activeWeapon.recoil)));
-                            cameraShake.ShakeX();
+                            cameraShake.Shake(DecideShake());
                             currentAmmo -= 1;
                             timeToShoot = startTimeToShoot * activeWeapon.fireRate;
                         }
@@ -112,7 +112,7 @@ public class WeaponManager : MonoBehaviour
                         if (timeToShoot <= 0)
                         {
                             Instantiate(shootPrefab, gunPoint.position, Quaternion.Euler(0f, 0f, transform.eulerAngles.z + transform.eulerAngles.z * Random.Range(-activeWeapon.recoil, activeWeapon.recoil)));
-                            cameraShake.ShakeX();
+                            cameraShake.Shake(DecideShake());
                             currentAmmo -= 1;
                             timeToShoot = startTimeToShoot * activeWeapon.fireRate;
                         }
@@ -126,4 +126,15 @@ public class WeaponManager : MonoBehaviour
             timeToShoot -= Time.deltaTime;
         }
     }
+
+    int DecideShake()
+    {
+        if (activeWeapon)
+        {
+            return activeWeapon.shakeLevel;
+        }
+
+        return 0;
+    }
+
 }

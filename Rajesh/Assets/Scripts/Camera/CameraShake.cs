@@ -5,7 +5,6 @@ using UnityEngine;
 public class CameraShake : MonoBehaviour
 {
     Animator anim;
-    public Animation shakeX;
     WeaponManager weaponManager;
 
     private void Start()
@@ -14,19 +13,31 @@ public class CameraShake : MonoBehaviour
         weaponManager = GameObject.FindGameObjectWithTag("WeaponManager").GetComponent<WeaponManager>();
     }
 
-    public void ShakeX()
+    //trzęsienie kamerą
+    public void Shake(int nmb)
     {
-        if (weaponManager.activeWeapon) 
+        if (weaponManager.activeWeapon)
         {
             anim.speed = 1 / weaponManager.activeWeapon.fireRate;
-            anim.SetTrigger("ShakeX");
         }
         else
         {
             anim.speed = 1;
         }
+        switch (nmb){
+            case 0:
+                anim.SetTrigger("Shake");
+                break;
+            case 1:
+                anim.SetTrigger("Shake1");
+                break;
+            default:
+                anim.SetTrigger("Shake");
+                break;
+        }
     }
 
+    //do cofania prędkości animacji do normalnej
     public void ResetSpeed()
     {
         anim.speed = 1;

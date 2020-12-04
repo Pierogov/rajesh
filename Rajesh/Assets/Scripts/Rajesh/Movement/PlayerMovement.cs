@@ -64,6 +64,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (sliding)
+        {
+            run = false;
+        }
+
         landingBuffer = landing;
 
         if(sliding && smoothEnd)

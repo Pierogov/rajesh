@@ -7,6 +7,7 @@ public class CameraMovement : MonoBehaviour
     Transform player;
     CameraShake cameraShake;
     public float smoothSpeed;
+    public Vector3 offset;
 
     private void Start()
     {
@@ -18,7 +19,7 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            cameraShake.ShakeX();
+            cameraShake.Shake(0);
         }    
     }
 
@@ -26,7 +27,7 @@ public class CameraMovement : MonoBehaviour
     {
         //poruszanie kamery za graczem
 
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, player.position, smoothSpeed * Time.fixedDeltaTime);
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, player.position + offset, smoothSpeed * Time.fixedDeltaTime);
         Vector3 buffer = transform.position;
         buffer.x = player.position.x;
         buffer.y = smoothedPosition.y;

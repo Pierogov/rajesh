@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Garand
   m_EditorClassIdentifier: 
   fireRate: 0.3
-  ammoMax: 6
+  ammoMax: 20
   recoil: 0.05
   bulletSpeed: 45
   lifeTime: 1
+  shakeLevel: 0
   automatic: 0
   fullImg: {fileID: 525395859506131036, guid: aae3d9f3f96f6ad49a28191997a6b70a, type: 3}
   halfImg: {fileID: -6716190210585797501, guid: aae3d9f3f96f6ad49a28191997a6b70a,

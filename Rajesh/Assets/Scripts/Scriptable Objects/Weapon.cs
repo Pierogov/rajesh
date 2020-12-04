@@ -9,13 +9,18 @@ public class Weapon : ScriptableObject
     //deklaracja parametrów
     //% w ułamku dziesiętnym np. 0.5 = 50%
     public float fireRate;
+
     public int ammoMax;
     //% w ułamku dziesiętnym np. 0.5 = 50%
     public float recoil;
 
     public float bulletSpeed;
 
+    public float damage;
+
     public float lifeTime;
+
+    public int shakeLevel;
 
     public bool automatic;
 
