@@ -16,9 +16,15 @@ MonoBehaviour:
   ammoMax: 20
   recoil: 0.05
   bulletSpeed: 45
+  damage: 0
   lifeTime: 1
   shakeLevel: 0
   automatic: 0
+  shootSound: {fileID: 8300000, guid: 67fd53ab5a05ddf4db243c9097fb419c, type: 3}
+  gunPointOffeset: {x: -0.351, y: -0.033, z: 0}
+  canDestroy: 0
+  emptyIMG: {fileID: 5800900895170942502, guid: aae3d9f3f96f6ad49a28191997a6b70a,
+    type: 3}
   fullImg: {fileID: 525395859506131036, guid: aae3d9f3f96f6ad49a28191997a6b70a, type: 3}
   halfImg: {fileID: -6716190210585797501, guid: aae3d9f3f96f6ad49a28191997a6b70a,
     type: 3}

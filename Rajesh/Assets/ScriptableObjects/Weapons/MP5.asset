@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b417653d439e64db4676c3dd8769e7, type: 3}
   m_Name: MP5
   m_EditorClassIdentifier: 
-  fireRate: 0.15
+  fireRate: 0.22
   ammoMax: 60
-  recoil: 0.04
-  bulletSpeed: 50
+  recoil: 0.025
+  bulletSpeed: 30
+  damage: 0
   lifeTime: 1
   shakeLevel: 0
   automatic: 1
+  shootSound: {fileID: 8300000, guid: 67fd53ab5a05ddf4db243c9097fb419c, type: 3}
+  gunPointOffeset: {x: -0.074, y: -0.038, z: 0}
+  canDestroy: 1
+  emptyIMG: {fileID: 4936067981747489776, guid: 662ae246a0fb8c34ca72f311620f6002,
+    type: 3}
   fullImg: {fileID: 8949572297517390930, guid: 662ae246a0fb8c34ca72f311620f6002, type: 3}
   halfImg: {fileID: -2431469165881245246, guid: 662ae246a0fb8c34ca72f311620f6002,
     type: 3}

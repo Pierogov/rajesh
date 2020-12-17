@@ -23,7 +23,15 @@ public class Weapon : ScriptableObject
     public int shakeLevel;
 
     public bool automatic;
+   
+    public AudioClip shootSound;
 
+    public Vector3 gunPointOffeset;
+
+    public bool canDestroy;
+
+    //bez obramówki
+    public Sprite emptyIMG;
     //powyżej połowy magazynka
     public Sprite fullImg;
     //poniżej połowy

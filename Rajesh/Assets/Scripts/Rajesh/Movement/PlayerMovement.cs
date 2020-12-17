@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     public bool startJump;
     public bool engagingJump;
     public bool smoothEnd;
+    public bool slidingUnder;
 
     private void Start()
     {
@@ -194,7 +195,7 @@ public class PlayerMovement : MonoBehaviour
             run = true;
             animator.speed = Mathf.Abs(moveInput) * (speed / startSpeed) * 1.5f;
         }
-        else if((moveInput < 1 && moveInput > -1  && moveInput != 0) && (Input.GetAxis("Horizontal") > 0 || Input.GetAxisRaw("Horizontal") < 0) && isGrounded)
+        else if((moveInput < 1 && moveInput > -1  && moveInput != 0) && (Input.GetAxisRaw("Horizontal") > 0 || Input.GetAxisRaw("Horizontal") < 0) && isGrounded)
         {
             animator.SetBool("isRunning", true);
             run = true;
@@ -341,7 +342,7 @@ public class PlayerMovement : MonoBehaviour
                 blockSlide = true;
             }
         }
-        else if(Input.GetKeyUp(KeyCode.DownArrow))
+        else if(Input.GetKeyUp(KeyCode.DownArrow) && !slidingUnder)
         {
             blockSlide = false;
             animator.SetBool("isSliding", false);
@@ -352,7 +353,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("isSliding", false);
             sliding = false;
-            if (slideTime < startSlideTime && !startJump && !sliding && !takingof) { slideTime += Time.deltaTime; }
+            if (slideTime < startSlideTime && !startJump && !sliding && !takingof && !slidingUnder) { slideTime += Time.deltaTime; }
         }
 
         if(timeToJump > 0) { timeToJump -= Time.deltaTime; }
@@ -393,6 +394,24 @@ public class PlayerMovement : MonoBehaviour
             smoothEnd = false;
         }
 
+        if (slidingUnder)
+        {
+            sliding = true;
+            moveInput = NormalizeValue(transform.localScale.x);
+            animator.SetBool("isSliding", true);
+        }
+
+        if(sliding && smoothEnd)
+        {
+            sliding = false;
+            animator.SetBool("isSliding", false);
+        }
+
+        if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow) && isGrounded && !jumped && !sliding)
+        {
+            moveInput = 0;
+            animator.SetBool("isRunning", false);
+        }
     }
     private void FixedUpdate()
     {
@@ -440,7 +459,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //funkcja określająca czy zmienna jest dodatnia (1), czy ujemna (-1)
-    float NormalizeValue(float about)
+    public float NormalizeValue(float about)
     {
         if(about > 0)
         {

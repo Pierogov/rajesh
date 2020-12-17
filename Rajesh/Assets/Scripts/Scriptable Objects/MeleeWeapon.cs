@@ -11,5 +11,7 @@ public class MeleeWeapon : ScriptableObject
     public float attackCooldown;
     public int usages;
 
+    public Sprite emptyIMG;
     public Sprite img;
+
 }

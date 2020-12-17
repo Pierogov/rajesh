@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 699778505285777023}
   - component: {fileID: 6873096702768448704}
   - component: {fileID: -4273663922866741294}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,9 +96,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0.5
-  whatIsSolid:
+  whatIsHitable:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2304
+  isPlayer: 0
 --- !u!96 &-4273663922866741294
 TrailRenderer:
   serializedVersion: 2

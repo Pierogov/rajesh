@@ -14,7 +14,8 @@ public class CameraMovement : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("CameraFollower").GetComponent<Transform>();
         cameraShake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
     }
-
+   
+    /*
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.T))
@@ -22,6 +23,7 @@ public class CameraMovement : MonoBehaviour
             cameraShake.Shake(0);
         }    
     }
+    */
 
     private void FixedUpdate()
     {

@@ -5,8 +5,9 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     public float distance;
-    public LayerMask whatIsSolid;
+    public LayerMask whatIsHitable;
     float speed;
+    public bool isPlayer;
 
     WeaponManager weaponManager; 
     Weapon activeWeapon;
@@ -26,21 +27,27 @@ public class BulletScript : MonoBehaviour
 
     void Update()
     {
-
         //wykrywanie kolizji
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, distance, whatIsSolid);
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, distance, whatIsHitable);
+        Debug.DrawLine(transform.position, transform.up * distance);
         if(hitInfo.collider != null)
         {
             if (hitInfo.collider.CompareTag("Enamy"))
             {
                 //deal dmg
             }
+            if (hitInfo.collider.CompareTag("Destruction") && activeWeapon.canDestroy)
+            {
+                hitInfo.collider.GetComponent<DestructionScript>().destructor = gameObject;
+                hitInfo.collider.GetComponent<DestructionScript>().DestructionActive();
+                Destroy(gameObject);
+                //Debug.Log("ej no byq");
+            }
             Destroy(gameObject);
         }
         //ruch
         transform.Translate(Vector2.up * -speed * Time.deltaTime);   
     }
-
 
     void DestroyBullet()
     {
